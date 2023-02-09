@@ -28,6 +28,10 @@ static const int XXXXXX__ = sizeof(LTE);
 Handle LTEOpen() { return (void*)0xdeadbeef; }
 bool LTEClose(Handle In) { return true; }
 
+bool LTEConnect(Handle In) { return true; }
+bool LTEDisConnect(Handle In) { return true; }
+bool LTEIsConnecting(Handle In) { return false; }
+
 bool LTESendReTry(Handle In, std::size_t MessageID) { return true; }
 bool LTEReQuestReTry(Handle In, std::size_t MessageID) { return true; }
 
@@ -53,9 +57,9 @@ public:
 	NetworkIO() { Open(); }
 
 	bool Open() { return false; }
-	bool Connect(std::uint8_t A, std::uint8_t B, std::uint8_t C, std::uint8_t D) { return false; }
+	bool Connect(std::uint8_t A, std::uint8_t B, std::uint8_t C, std::uint8_t D,std::uint16_t Port) { return false; }
 	bool DisConnect() { return false; }
-	bool IsConnected() { return  true; }
+	bool IsConnecting() { return  true; }
 
 	bool Write(const std::uint8_t* P, std::size_t L) { return true; }
 	std::vector<std::uint8_t> Read(std::size_t L) { return {}; }
@@ -68,8 +72,8 @@ protected:
 int main() {
 	NetworkIO Net;
 	std::uint8_t S[] = "HellowWorld!";
-	Net.Connect(192, 168, 1, 128);
-	if (!Net.IsConnected()) { return -1; }
+	Net.Connect(192, 168, 1, 128, 80);
+	if (!Net.IsConnecting()) { return -1; }
 	Net.Write(S, sizeof(S));
 	auto D = Net.Read(128);
 
