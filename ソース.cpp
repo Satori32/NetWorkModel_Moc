@@ -5,9 +5,9 @@
 //this is moc. not work on standalone.
 //and this is moc of skin. we need implement by realism.
 
-typedef void* Handle;
-typedef void* Address;
-typedef void* ID;
+typedef void* Handle;//this is like a undefined.
+typedef void* Address;//this is like a undefined.
+typedef void* ID;//this is like a undefined.
 
 const char Sig[] = "VirtalLTEHeader\n\0";
 const char Version[] = "0.01a\n\0";
