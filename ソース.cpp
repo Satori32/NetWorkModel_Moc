@@ -9,7 +9,7 @@ typedef void* Handle;
 typedef void* Address;
 typedef void* ID;
 
-const char Sig[] = "VirtalLTEHeader\m\0";
+const char Sig[] = "VirtalLTEHeader\n\0";
 const char Version[] = "0.01a\n\0";
 struct LTE {
 	char Sig[32]{};
@@ -55,13 +55,13 @@ public:
 	bool Open() { return false; }
 	bool Connect(std::uint8_t A, std::uint8_t B, std::uint8_t C, std::uint8_t D) { return false; }
 	bool DisConnect() { return false; }
-	bool IsConnected() { return  false; }
+	bool IsConnected() { return  true; }
 
-	bool Write(const std::uint8_t* P,std::size_t L){return }
-	std::vector<std::uint8_t> Read(std::size_t L) {}
+	bool Write(const std::uint8_t* P, std::size_t L) { return true; }
+	std::vector<std::uint8_t> Read(std::size_t L) { return {}; }
 protected:
 	Handle H = nullptr;
-	static const char Sig[] = "NetworkHeader\n\0";
+	const char Sig[32] = "NetworkHeader\n\0";
 	//std::vector<std::uint8_t> D;
 };
 
