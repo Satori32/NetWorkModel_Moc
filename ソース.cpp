@@ -55,8 +55,10 @@ std::vector<std::uint8_t> LTERead(Handle In,std::size_t L) {
 class NetworkIO {
 public:
 	NetworkIO() { Open(); }
+	virtual ~NetworkIO() { DisConnect(); Close(); }
 
 	bool Open() { return false; }
+	bool Close() { return true; }
 	bool Connect(std::uint8_t A, std::uint8_t B, std::uint8_t C, std::uint8_t D,std::uint16_t Port) { return false; }
 	bool DisConnect() { return false; }
 	bool IsConnecting() { return  true; }
