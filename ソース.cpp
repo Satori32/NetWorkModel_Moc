@@ -64,8 +64,31 @@ public:
 	bool IsConnecting() { return  true; }
 
 	bool Write(const std::uint8_t* P, std::size_t L) { return true; }
-	std::vector<std::uint8_t> Read(std::size_t L) { return {}; }
+	std::vector<std::uint8_t> Read() { 	return  APIRead(); 	}
+
 protected:
+
+	std::vector<std::uint8_t> APIRead() {//daty fix... Orz
+		//do something by outer API work.
+		
+		std::uint8_t* P=nullptr;
+		std::size_t L = 0;
+
+		APIRead(H, &P, &L);//maybe return alloced memory.so need free.
+
+		std::vector<std::uint8_t> R{ P,P + L };//like a pointer to work to iterator.
+		//delete[] P;//maybe need it.see your manual.
+		
+		return R;
+	}
+
+	bool APIRead(Handle H, std::uint8_t** P, std::size_t* L) {
+		//do something. by lowlevel Work.
+		return true;
+	}
+
+
+	
 	Handle H = nullptr;
 	const char Sig[32] = "NetworkHeader\n\0";
 	//std::vector<std::uint8_t> D;
@@ -77,7 +100,7 @@ int main() {
 	Net.Connect(192, 168, 1, 128, 80);
 	if (!Net.IsConnecting()) { return -1; }
 	Net.Write(S, sizeof(S));
-	auto D = Net.Read(128);
+	auto D = Net.Read();
 
 	Net.DisConnect();
 
